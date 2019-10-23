@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Interfaces;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -6,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class UserDAO : DAO
+    public class UserDAO : DAO, ICrud<User>
     {
         List<User> user = new List<User>();
        
@@ -58,6 +59,21 @@ namespace DAL
 
                 con.Close();
             }
+        }
+
+        public List<User> GetObjects()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateEntity(int EntityId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteEntity(int EntityId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

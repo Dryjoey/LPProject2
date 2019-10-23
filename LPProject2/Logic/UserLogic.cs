@@ -1,4 +1,6 @@
 ﻿using DAL;
+using Interfaces;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,12 +9,23 @@ using System.Text;
 
 namespace Logic
 {
-    class UserLogic
+    public class UserLogic
     {
-         
+        public ICrud<User> user_dao { get; }
+
         public UserLogic()
         {
-            UserDAO userdao = new UserDAO();
+            user_dao = new UserDAO();
+        }
+
+        public void AddUser(User user)
+        {
+            user_dao.AddEntity(user);
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return user_dao.GetObjects();
         }
     }
 }

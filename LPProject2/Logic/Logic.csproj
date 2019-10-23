@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DAO\DAL.csproj" />
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
     <ProjectReference Include="..\LPProject2\LPProject2.csproj" />
     <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
