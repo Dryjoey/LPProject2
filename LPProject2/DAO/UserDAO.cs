@@ -27,7 +27,7 @@ namespace DAL
                 while (read.Read())
                 {
                     result.Add(new User(read.GetInt32(0), read.GetString(1), read.GetString(2), read.GetString(3), read.GetString(4),
-                        read.GetString(5), read.GetBoolean(6)));
+                        read.GetString(5)));
                 }
 
                 con.Close();
@@ -41,7 +41,7 @@ namespace DAL
 
             string query =
 
-                "INSERT INTO User(Id, Name, Password, Email, Tel, Nationalty, Admin) VALUES (@Id, @Name, @Password, @Email, @Tel, @Nationalty, @Admin)";
+                "INSERT INTO User(Id, Name, Password, Email, Tel, Nationalty, Admin) VALUES (@Id, @Name, @Password, @Email, @Tel, @Nationalty)";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -51,7 +51,7 @@ namespace DAL
                 command.Parameters.AddWithValue("@Email", user.email);
                 command.Parameters.AddWithValue("@Tel", user.tel);
                 command.Parameters.AddWithValue("@Nationalty", user.nationality);
-                command.Parameters.AddWithValue("@Admin", user.admin);
+              
                 
 
 

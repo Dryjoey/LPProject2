@@ -26,7 +26,7 @@ namespace DAL
 
                 while (read.Read())
                 {
-                    result.Add(new Game(read.GetInt32(0), read.GetString(1), read.GetType(2), read.GetString(3), read.GetBoolean(4)));
+                //    result.Add(new Game(read.GetInt32(0), read.GetString(1), read.GetString(2), read.GetString(3), read.GetBoolean(4)));
                 }
             }
 

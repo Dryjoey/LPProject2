@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewData["Title"] = "Signup";
+}
+
+ 
+<h2>Signup</h2>
+<form asp-controller="User" asp-action="Signup" method="post">
+    <a href="@Url.Action("Signup", "User")"> Signup</a>
+    <button type="button" class="btn btn-primary btn-lg btn-block">I am an costumer</button>
+</form>

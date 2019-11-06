@@ -14,6 +14,10 @@ namespace LPProject2.Controllers
         {
             return View();
         }
+        public IActionResult Signup()
+        {
+            return View();
+        }
 
         public IActionResult About()
         {

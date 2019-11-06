@@ -4,7 +4,7 @@ namespace Models
 {
     public class User
     {
-        public User(int id, string name, string password, string tel, string email, string nationality, bool admin)
+        public User(int id, string name, string password, string tel, string email, string nationality)
         {
             this.id = id;
             this.name = name;
@@ -12,7 +12,7 @@ namespace Models
             this.tel = tel;
             this.email = email;
             this.nationality = nationality;
-            this.admin = admin;
+             
         }
 
         public int id { get; private set; }

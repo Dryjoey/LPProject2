@@ -10,7 +10,7 @@ namespace DAL
         public SqlConnection con;
         public DAO()
         {
-            this.con = new SqlConnection("Server=mssql.fhict.local;Database=dbi382997;User Id=dbi382997;Password=Woody125;");
+            this.con = new SqlConnection("Server = studmysql01.fhict.local; Uid = dbi382997; Database = dbi382997; Pwd =Woody125;");
         }
     }
 }
