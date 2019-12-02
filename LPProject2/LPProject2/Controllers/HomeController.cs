@@ -40,7 +40,7 @@ namespace LPProject2.Controllers
 
         public IActionResult Games()
         {
-            return View();
+            return View("Games");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

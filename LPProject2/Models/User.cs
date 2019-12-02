@@ -1,8 +1,9 @@
 ﻿using System;
+using Interfaces;
 
 namespace Models
 {
-    public class User
+    public class User: IUser
     {
         public User(int id, string name, string password, string tel, string email, string nationality)
         {

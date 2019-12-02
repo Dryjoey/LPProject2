@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Interfaces;
 
 namespace LPProject2.Models
 {
-    public class GameViewModel
+    public class GameViewModel: IGame
     {
         public int GameId { get; set; }
         [Display(Name = "Name")]

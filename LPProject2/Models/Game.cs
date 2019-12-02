@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Interfaces;
+
 
 namespace Models
 {
-   public class Game
+   public class Game :IGame
     {
         public Game(int id, string name, string categorie, string description, bool hireable)
         {

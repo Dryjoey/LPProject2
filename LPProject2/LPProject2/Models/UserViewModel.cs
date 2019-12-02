@@ -5,21 +5,22 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using DAL;
+using Interfaces;
 
 namespace LPProject2.Models
 {
-    public class UserViewModel
+    public class UserViewModel: IUser
     {
          
-            public int UserId { get; set; }
+            public int Id { get; set; }
             [Display(Name = "Name")]
-            public string UserName { get; set; }
+            public string Name { get; set; }
             [Display(Name = "Tel")]
-            public string UserPhone { get; set; }
+            public string Phone { get; set; }
             [Display(Name = "Email")]
-            public string UserEmail { get; set; }
+            public string Email { get; set; }
             [Display(Name = "Nationalty")]
-            public string UserNationalty { get; set; }
+            public string Nationalty { get; set; }
 
             [DataType(DataType.Password)]
             [Required(ErrorMessage = "Please enter your Password.")]
@@ -44,7 +45,7 @@ namespace LPProject2.Models
                         if (login)
                         {
                             message = "1";
-                            UserName = reader["Name"].ToString();
+                            Name = reader["Name"].ToString();
 
 
                         }

@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Interfaces;
 
-namespace Models
+namespace Interfaces
 {
-    class Ad: IAd
+    public class IAd
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public Game Game { get; private set; }
-
+        public IGame Game { get; private set; }
     }
 }

@@ -21,17 +21,17 @@ namespace LPProject2.Controllers
             {
                 resultallusers.Add(new UserViewModel()
                 {
-                    UserId = user.id,
-                    UserName = user.name,
-                    UserEmail = user.email,
-                    UserPhone = user.tel,
-                    UserNationalty = user.nationality
+                    Id = user.id,
+                    Name = user.name,
+                    Email = user.email,
+                    Phone = user.tel,
+                    Nationalty = user.nationality
                 });
             }
 
             UserViewModel resultusers = new UserViewModel();
 
-            resultusers = resultallusers.Find(x => x.UserId == Int32.Parse(id));
+            resultusers = resultallusers.Find(x => x.Id == Int32.Parse(id));
 
             return View(resultallusers);
         }
@@ -44,7 +44,7 @@ namespace LPProject2.Controllers
         public IActionResult AddUser(UserViewModel form_User)
         {
             UserLogic reader = new UserLogic();
-            var user = new User(0, form_User.UserName, form_User.Password, form_User.UserEmail, form_User.UserPhone, form_User.UserNationalty);
+            var user = new User(0, form_User.Name, form_User.Password,  form_User.Phone, form_User.Email, form_User.Nationalty);
             reader.AddUser(user);
             return View("Signup");
         }
@@ -59,11 +59,11 @@ namespace LPProject2.Controllers
             {
                 resultAllUsers.Add(new UserViewModel()
                 {
-                    UserId = user.id,
-                    UserName = user.name,
-                    UserPhone = user.tel,
-                    UserEmail = user.email,
-                    UserNationalty = user.nationality
+                    Id = user.id,
+                    Name = user.name,
+                    Phone = user.tel,
+                    Email = user.email,
+                    Nationalty = user.nationality
 
 
                 }) ;

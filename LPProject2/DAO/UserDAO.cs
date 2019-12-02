@@ -15,7 +15,7 @@ namespace DAL
         {
             con.Open();
 
-            string query = "SELECT * FROM User";
+            string query = "SELECT * FROM WebUser";
             List<User> result = new List<User>();
 
             using (SqlCommand command = new SqlCommand(query, con))
@@ -41,15 +41,15 @@ namespace DAL
 
             string query =
 
-                "INSERT INTO User(Id, Name, Password, Email, Tel, Nationalty, Admin) VALUES (@Id, @Name, @Password, @Email, @Tel, @Nationalty)";
+                "INSERT INTO [WebUser] (idUser, Name, Password, Email, Phone, Nationalty) VALUES (@idUser, @Name, @Password, @Email, @Phone, @Nationalty)";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {
-                command.Parameters.AddWithValue("@Id", user.id);
+                command.Parameters.AddWithValue("@idUser", user.id);
                 command.Parameters.AddWithValue("@Name", user.name);
                 command.Parameters.AddWithValue("@Password", user.password);
                 command.Parameters.AddWithValue("@Email", user.email);
-                command.Parameters.AddWithValue("@Tel", user.tel);
+                command.Parameters.AddWithValue("@Phone", user.tel);
                 command.Parameters.AddWithValue("@Nationalty", user.nationality);
               
                 
