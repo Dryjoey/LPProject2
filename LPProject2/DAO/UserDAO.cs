@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class UserDAO : DAO, ICrud<User>
+    public class UserDAO : DAO, ICrud<User>, IUserRepository
     {
         List<User> user = new List<User>();
        
@@ -74,6 +74,32 @@ namespace DAL
         public void DeleteEntity(int EntityId)
         {
             throw new NotImplementedException();
+        }
+
+        public UserDTO GetUserByName(string username)
+        {
+            if (string.IsNullOrWhiteSpace(username)) throw new ArgumentNullException(nameof(username));
+
+            con.Open();
+
+            var cmd = new SqlCommand("SELECT [Id], [Username], [Password] FROM [User] WHERE [Username] = @Username", con);
+            cmd.Parameters.Add(new SqlParameter("Username", username));
+
+            var reader = cmd.ExecuteReader();
+
+            UserDTO user = null;
+
+            while (reader.Read())
+            {
+                user = new UserDTO
+                {
+                    id = (int)reader["Id"],
+                    name = reader["Username"].ToString(),
+                    password = reader["Password"].ToString(),
+                };
+            }
+
+            return user;
         }
     }
 }

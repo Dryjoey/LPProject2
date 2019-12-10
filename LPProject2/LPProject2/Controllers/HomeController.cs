@@ -18,6 +18,10 @@ namespace LPProject2.Controllers
         {
             return View();
         }
+        public IActionResult Signuppage()
+        {
+            return View("User", "Signup");
+        }
 
         public IActionResult About()
         {
@@ -47,6 +51,10 @@ namespace LPProject2.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+        public IActionResult Login()
+        {
+            return View("Login");
         }
     }
 }

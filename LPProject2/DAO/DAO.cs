@@ -12,5 +12,6 @@ namespace DAL
         {
             this.con = new SqlConnection("Server = mssql.fhict.local; Uid = dbi382997; Database = dbi382997; Pwd =Woody125;");
         }
+       
     }
 }

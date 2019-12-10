@@ -1,0 +1,79 @@
+﻿
+@model AdViewModel;
+
+@{
+    ViewData["Title"] = "Gamepage";
+}
+
+<h2>Gamepage</h2>
+
+<div class="main-content">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <form style="padding-top: 15px; width: 100%;">
+                <div class="row">
+                    <div class="col-md-7">
+                        <div class="overview-wrap">
+                            <h2 class="title-1"><i class="fas  fa-user icon-margin-right"></i> @(Model.Name)</h2>
+                        </div>
+                    </div>
+                     
+                    <div class="col-md-2" style="margin-bottom: 1rem;">
+                        <button asp-controller="Client" asp-action="" asp-route-id="@Model.AdId" type="submit" class="au-btn orange float-right">Update Ad</button>
+
+                    </div>
+                </div>
+
+                <div class="row" style="margin-bottom: 2rem;">
+                    <div class="col-md-6">
+                        <div class="form-group row">
+                            <label for="" class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Name)</label>
+                            <div class="col-sm-9">
+                                <input readonly type="text" style="font-size:14px" class="form-control" value="@(Model.Name)">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Email" class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Game.name)</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Game.name" type="text" style="font-size:14px" id="Name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Phone" class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Game.category)</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Game.category" type="text" style="font-size:14px" id="Category" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Birthday" class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Game.description)</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Game.description" type="text" style="font-size:14px" id="Description" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="Address" class="col-sm-3 col-form-label">@Html.DisplayNameFor(model => model.Game.price)</label>
+                            <div class="col-sm-9">
+                                <input asp-for="Game.price" type="number" style="font-size:14px" id="Price" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                     
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-9">
+                                 
+                            </div>
+                            <div class="col-md-3">
+                                <button asp-controller="Game" asp-action="HireGame" asp-route-id="@Model.Game.id" class="au-btn orange float-right">Hire Game</button>
+                            </div>
+                        </div>
+                         
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

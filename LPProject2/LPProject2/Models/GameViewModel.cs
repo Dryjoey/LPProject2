@@ -14,6 +14,8 @@ namespace LPProject2.Models
         public string GameName { get; set; }
         [Display(Name = "Category")]
         public string Category { get; set; }
+        [Display(Name ="Price")]
+        public int Price { get; set; }
         [Display(Name = "Discription")]
         public string Discription { get; set; }
         [Display(Name = "Hireable")]

@@ -26,7 +26,7 @@ namespace DAL
 
                 while (read.Read())
                 {
-                //    result.Add(new Game(read.GetInt32(0), read.GetString(1), read.GetString(2), read.GetString(3), read.GetBoolean(4)));
+                  result.Add(new Game(read.GetInt32(0), read.GetString(1), read.GetString(2),read.GetInt32(3), read.GetString(4), read.GetBoolean(5)));
                 }
             }
 
@@ -72,6 +72,18 @@ namespace DAL
 
                 con.Close();
             }
+        }
+        public void Hiregame(Game game, User user)
+        {
+            con.Open();
+            string query = "SELECT Game.GameID, WebUser.WebUser.Name FROM Game INNER JOIN WebUser ON Game.GameID = WebUser.WebuserID";
+
+            using (SqlCommand command = new SqlCommand(query, con))
+            {
+                
+                command.ExecuteNonQuery();
+            }
+            con.Close();
         }
     }
 }

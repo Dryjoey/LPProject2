@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<GameViewModel>;
 @{
     ViewData["Title"] = "Games";
 }
@@ -7,44 +7,30 @@
 <!DOCTYPE html>
 <html>
 <body style="background-color:black;">
-    <div class="topnav">
-        <a class="GamesforHire" href="#home">Home</a>
-        <a href="#games">Games</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a href="#Signup">Signup</a>
-        <input type="text" placeholder="Search..">
-    </div>
+
 </body>
 </html>
- 
+
 
 <div class="text-left"><font color="white" size="10">Games for Hire</font></div>
+<div><a asp-area="" asp-controller="Game" asp-action="GameForm">AddGame</a></div>
+<div><a asp-area="" asp-controller="Ad" asp-action="CreateAd">AddAd</a></div>
+<br />
+<div class="row">
+    <div class="table-responsive table--no-card m-b-40 ">
+        <table class="table table-borderless table-striped table-earning" id="myTable">
+            <thead>
+                <tr>
 
-
-<table>
-    <tr>
-        <th>Game</th>
-        <th>Categorie</th>
-        <th>Hireable</th>
-    </tr>
-    <tr>
-        <td>God of war</td>
-        <td>Action, Adventure</td>
-        <td>Yes</td>
-    </tr>
-    <tr>
-        <td>
-    <a href="~/Views/Games/Gamepage.cshtml" ></a>Dark Souls</td>
-        <td>Action, Adventure</td>
-        <td>Yes</td>
-    </tr>
-    <tr>
-        <td>Fifa 21</td>
-        <td>Sports</td>
-        <td>21/09/2020</td>
-    </tr>
-</table>
+                    <th>@Html.DisplayNameFor(model => model.GameName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Category)</th>
+                    <th>@Html.DisplayNameFor(model => model.Discription)</th>
+                    <th>@Html.DisplayNameFor(model => model.Hireable)</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
 
 <br />
 <br />
