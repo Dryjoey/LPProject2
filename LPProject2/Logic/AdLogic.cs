@@ -1,10 +1,14 @@
-﻿using System;
+﻿using Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Logic
 {
-    class AdLogic
+    public class Ad: IAd
     {
+         
+        public Game Game { get; private set; }
+
     }
 }

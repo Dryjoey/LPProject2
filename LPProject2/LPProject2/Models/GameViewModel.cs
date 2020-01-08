@@ -11,11 +11,11 @@ namespace LPProject2.Models
     {
         public int GameId { get; set; }
         [Display(Name = "Name")]
-        public string GameName { get; set; }
+        public string Name { get; set; }
         [Display(Name = "Category")]
         public string Category { get; set; }
         [Display(Name ="Price")]
-        public int Price { get; set; }
+        public string Price { get; set; }
         [Display(Name = "Discription")]
         public string Discription { get; set; }
         [Display(Name = "Hireable")]

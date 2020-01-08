@@ -1,0 +1,10 @@
+﻿@model LPProject2.Models.UserViewModel;
+@using System.Security.Claims
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<h2>@User.Claims.First(c => c.Type == ClaimTypes.Name).Value</h2>

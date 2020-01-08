@@ -1,30 +1,30 @@
 ﻿using DAL;
 using Interfaces;
-using Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Models;
+ 
 
 
 
 namespace Logic
 {
-    public class UserLogic
+    public class User : IUser
     {
-        public ICrud<User> user_dao { get; }
+      
+        public ICrud<UserDTO> user_dao { get; }
 
-        public UserLogic()
+        public User()
         {
-            user_dao = new UserDAO();
+            UserDAO user_dao = new UserDAO();
         }
 
-        public void AddUser(User user)
+        public void AddUser(UserDTO user)
         {
             user_dao.AddEntity(user);
         }
 
-        public List<User> GetAllUsers()
+        public List<UserDTO> GetAllUsers()
         {
             return user_dao.GetObjects();
         }

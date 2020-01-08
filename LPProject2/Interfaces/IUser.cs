@@ -6,11 +6,25 @@ namespace Interfaces
 {
     public class IUser
     {
-        public int id { get; private set; }
-        public string name { get; private set; }
-        public string password { get; private set; }
-        public string tel { get; private set; }
-        public string email { get; private set; }
-        public string nationality { get; private set; }
+        public IUser()
+        {
+        }
+
+        public IUser(int id, string name, string password, int tel, string email, string nationality)
+        {
+            Id = id;
+            Name = name;
+            Password = password;
+            Tel = tel;
+            Email = email;
+            Nationality = nationality;
+        }
+
+        public int Id { get; private set; }
+        public string Name { get; private set; }
+        public string Password { get; private set; }
+        public int Tel { get; private set; }
+        public string Email { get; private set; }
+        public string Nationality { get; private set; }
     }
 }

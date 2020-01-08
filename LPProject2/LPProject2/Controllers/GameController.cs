@@ -2,36 +2,37 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DAL;
 using Logic;
 using LPProject2.Models;
 using Microsoft.AspNetCore.Mvc;
-using Models;
+ 
 
 namespace LPProject2.Controllers
 {
     public class GamesController : Controller
     {
-        public IActionResult Index()
+        
+
+        public IActionResult GameForm()
         {
             return View();
         }
 
-        public IActionResult GameForm()
-        {
-            return View("GameForm");
-        }
-
         public IActionResult AddGame(GameViewModel form_game)
         {
-            GameLogic reader = new GameLogic();
-            var game = new Game(0, form_game.GameName, form_game.Category, form_game.price, form_game.Discription, form_game.Hireable);
+
+            Game reader = new Game();
+           
+            var game = new GameDTO(0, form_game.Name, form_game.Category, form_game.Price, form_game.Discription, form_game.Hireable);
+            
             reader.AddGame(game);
-            return View("Game");
+            return View("Games");
         }
         [HttpGet]
-        public IActionResult Overview()
+        public IActionResult Games()
         {
-            GameLogic reader = new GameLogic();
+            Game reader = new Game();
 
             List<GameViewModel> resultAllGames = new List<GameViewModel>();
             
@@ -40,18 +41,18 @@ namespace LPProject2.Controllers
             {
                 resultAllGames.Add(new GameViewModel()
                 {
-                    GameId =  game.id,
-                    GameName = game.name,
-                    Category = game.category,
-                    Price = game.price,
-                    Discription = game.description,
-                    Hireable = game.hireable
+                    GameId =  game.Id,
+                    Name = game.Name,
+                    Category = game.Category,
+                    Price = game.Price,
+                    Discription = game.Description,
+                    Hireable = game.Hireable
 
 
                 });
                  
             }
-            return View("Overview", resultAllGames);
+            return View("Games", resultAllGames);
         }
     }
 }

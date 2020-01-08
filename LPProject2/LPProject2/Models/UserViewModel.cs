@@ -9,14 +9,14 @@ using Interfaces;
 
 namespace LPProject2.Models
 {
-    public class UserViewModel: IUser
+    public class UserViewModel 
     {
          
             public int Id { get; set; }
             [Display(Name = "Name")]
             public string Name { get; set; }
             [Display(Name = "Tel")]
-            public string Phone { get; set; }
+            public int Phone { get; set; }
             [Display(Name = "Email")]
             public string Email { get; set; }
             [Display(Name = "Nationalty")]

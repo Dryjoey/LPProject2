@@ -7,7 +7,6 @@
   <ItemGroup>
     <ProjectReference Include="..\DAO\DAL.csproj" />
     <ProjectReference Include="..\Interfaces\Interfaces.csproj" />
-    <ProjectReference Include="..\Models\Models.csproj" />
   </ItemGroup>
 
 </Project>

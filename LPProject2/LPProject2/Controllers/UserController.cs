@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Logic;
-using LPProject2.Models;
-using Models;
 using DAL;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Authorization;
@@ -13,6 +11,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using LPProject2.Models;
 
 namespace LPProject2.Controllers
 {
@@ -43,7 +42,7 @@ namespace LPProject2.Controllers
              
             if (!ModelState.IsValid) return View(model);
 
-             
+
             UserDTO user = _repository.GetUserByName(model.Name);
             if (user == null)
             {
@@ -52,8 +51,8 @@ namespace LPProject2.Controllers
             }
 
              
-            var hasher = new PasswordHasher<UserDTO>();
-            if (hasher.VerifyHashedPassword(user, user.password, model.Password) == PasswordVerificationResult.Failed)
+            string hasher = BCrypt.Net.BCrypt.HashPassword(user.password);
+            if (BCrypt.Net.BCrypt.Verify(model.Password, user.password))
             {
                 ModelState.AddModelError("", "The user name or password provided is incorrect.");
                 return View(model);
@@ -73,7 +72,7 @@ namespace LPProject2.Controllers
                 new ClaimsPrincipal(claimsIdentity),
                 authProperties);
 
-            return LocalRedirect(returnUrl);
+            return RedirectToAction("Login");
         }
 
          
@@ -86,7 +85,7 @@ namespace LPProject2.Controllers
     
     public IActionResult Index(string id)
         {
-            UserLogic reader = new UserLogic();
+            User reader = new User();
 
             List<UserViewModel> resultallusers = new List<UserViewModel>();
 
@@ -116,15 +115,17 @@ namespace LPProject2.Controllers
 
         public IActionResult AddUser(UserViewModel form_User)
         {
-            UserLogic reader = new UserLogic();
-            var user = new User(0, form_User.Name, form_User.Password,  form_User.Phone, form_User.Email, form_User.Nationalty);
+            User reader = new User();
+            BCrypt.Net.BCrypt.HashPassword(form_User.Password);
+            var user = new global::DAL.UserDTO(0, form_User.Name, form_User.Password,  form_User.Phone, form_User.Email, form_User.Nationalty);
+           
             reader.AddUser(user);
             return View("Signup");
         }
         [HttpGet]
         public IActionResult Overview()
         {
-            UserLogic reader = new UserLogic();
+            User reader = new User();
 
             List<UserViewModel> resultAllUsers = new List<UserViewModel>();
 
@@ -143,16 +144,17 @@ namespace LPProject2.Controllers
             }
             return View("Overview", resultAllUsers);
         }
+        public string schijt = BCrypt.Net.BCrypt.HashPassword("henk123") ;
 
         [HttpGet]
 
          
         [HttpPost]
-        public IActionResult Verify(User user)
+        public IActionResult Verify(global::Interfaces.IUser user)
         {
             ud.con.Open();
             com.Connection = ud.con;
-            com.CommandText = "SELECT * from WebUser where Email='"+user.email+"'and Password='"+user.password+"'";
+            com.CommandText = "SELECT * from WebUser where Name='"+user.Name+"'and Password='"+user.Password+"'";
             reader = com.ExecuteReader();
             if (reader.Read())
             {

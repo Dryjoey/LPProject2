@@ -8,6 +8,6 @@ namespace Interfaces
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public IGame Game { get; private set; }
+        
     }
 }

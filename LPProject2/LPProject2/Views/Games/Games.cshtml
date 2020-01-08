@@ -13,20 +13,27 @@
 
 
 <div class="text-left"><font color="white" size="10">Games for Hire</font></div>
-<div><a asp-area="" asp-controller="Game" asp-action="GameForm">AddGame</a></div>
+<div><a asp-area="" asp-controller="Games" asp-action="GameForm">AddGame</a></div>
 <div><a asp-area="" asp-controller="Ad" asp-action="CreateAd">AddAd</a></div>
 <br />
 <div class="row">
     <div class="table-responsive table--no-card m-b-40 ">
         <table class="table table-borderless table-striped table-earning" id="myTable">
             <thead>
+                @if (Model.Count < 0)
+                {
+                    <p>There are no games at the moment</p>
+                }
+                else
+                {
+                @foreach (var game in Model)
+                {
                 <tr>
 
-                    <th>@Html.DisplayNameFor(model => model.GameName)</th>
-                    <th>@Html.DisplayNameFor(model => model.Category)</th>
-                    <th>@Html.DisplayNameFor(model => model.Discription)</th>
-                    <th>@Html.DisplayNameFor(model => model.Hireable)</th>
+                    <th>@game.name)</th>
+                     
                 </tr>
+                }}
             </thead>
         </table>
     </div>

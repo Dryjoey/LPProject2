@@ -1,14 +1,13 @@
-﻿
-<!DOCTYPE html>
+﻿@using BCrypt.Net;
+@using LPProject2.Controllers;
+ <!DOCTYPE html>
 <html>
 <body style="background-image:url(https://www.designyourway.net/diverse/darkpat/COLOURlovers.com-Grey_Background.jpg);">
 
 
 
-
-
-
-    <!-- Wrapper for slides -->
+     
+    per for slides -->
 
 
     <img src="~/images/God of war.jpg" alt="God of War" class="center-block" style=" width:1000px; height: 563px">
@@ -51,5 +50,8 @@
         &nbsp;
         &nbsp;
     </div>
+    <div><h1> @{string schijt = BCrypt.HashPassword("henk123");
+    }@schijt</h1></div>
+    
 </body>
 </html>

@@ -1,5 +1,5 @@
 ﻿using Interfaces;
-using Models;
+ 
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,16 +7,16 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
-    public class UserDAO : DAO, ICrud<User>, IUserRepository
+    public class UserDAO : DAO, ICrud<UserDTO>, IUserRepository
     {
-        List<User> user = new List<User>();
+        List<UserDTO> user = new List<UserDTO>();
        
-        public List<User> GetAllPerformers()
+        public List<UserDTO> GetAllPerformers()
         {
             con.Open();
 
             string query = "SELECT * FROM WebUser";
-            List<User> result = new List<User>();
+            List<UserDTO> result = new List<UserDTO>();
 
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -26,7 +26,7 @@ namespace DAL
 
                 while (read.Read())
                 {
-                    result.Add(new User(read.GetInt32(0), read.GetString(1), read.GetString(2), read.GetString(3), read.GetString(4),
+                    result.Add(new UserDTO(read.GetInt32(0), read.GetString(1), read.GetString(2), read.GetInt32(3), read.GetString(4),
                         read.GetString(5)));
                 }
 
@@ -35,13 +35,13 @@ namespace DAL
                 return result;
             }
         }
-        public void AddEntity(User user)
+        public void AddEntity(UserDTO user)
         {
             con.Open();
 
             string query =
 
-                "INSERT INTO [WebUser] (idUser, Name, Password, Email, Phone, Nationalty) VALUES (@idUser, @Name, @Password, @Email, @Phone, @Nationalty)";
+                "INSERT INTO [WebUser] (idUser, Name, Password, Email, Tel, Nationalty) VALUES (@idUser, @Name, @Password, @Email, @Tel, @Nationalty)";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {
@@ -49,7 +49,7 @@ namespace DAL
                 command.Parameters.AddWithValue("@Name", user.name);
                 command.Parameters.AddWithValue("@Password", user.password);
                 command.Parameters.AddWithValue("@Email", user.email);
-                command.Parameters.AddWithValue("@Phone", user.tel);
+                command.Parameters.AddWithValue("@Tel", user.tel);
                 command.Parameters.AddWithValue("@Nationalty", user.nationality);
               
                 
@@ -61,7 +61,7 @@ namespace DAL
             }
         }
 
-        public List<User> GetObjects()
+        public List<UserDTO> GetObjects()
         {
             throw new NotImplementedException();
         }
@@ -82,8 +82,8 @@ namespace DAL
 
             con.Open();
 
-            var cmd = new SqlCommand("SELECT [Id], [Username], [Password] FROM [User] WHERE [Username] = @Username", con);
-            cmd.Parameters.Add(new SqlParameter("Username", username));
+            var cmd = new SqlCommand("SELECT [idUser], [Name], [Password], [Email], [Tel], [Nationalty] FROM [WebUser] WHERE [Name] = @Name", con);
+            cmd.Parameters.Add(new SqlParameter("Name", username));
 
             var reader = cmd.ExecuteReader();
 
@@ -91,12 +91,10 @@ namespace DAL
 
             while (reader.Read())
             {
-                user = new UserDTO
-                {
-                    id = (int)reader["Id"],
-                    name = reader["Username"].ToString(),
-                    password = reader["Password"].ToString(),
-                };
+                int userid = (int)reader["idUser"];
+                int tel = Convert.ToInt32(reader["Tel"]);
+                user = new UserDTO(id: userid , name: reader["Name"].ToString(), password: reader["Password"].ToString(),  email: reader["Email"].ToString(), tel:tel, nationality: reader["Nationalty"].ToString());
+                 
             }
 
             return user;

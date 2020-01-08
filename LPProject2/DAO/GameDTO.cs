@@ -1,15 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Interfaces;
+
 namespace DAL
 {
-    class GameDTO: IGame
+   public class GameDTO
     {
-        public int id { get; private set; }
-        public string name { get; private set; }
-        public string category { get; private set; }
-        public string description { get; private set; }
-        public bool hireable { get; private set; }
+         
+            public GameDTO(int id, string name, string categorie, string price, string description, bool hireable)
+            {
+                this.Id = id;
+                this.Name = name;
+                this.Category = categorie;
+                this.Price = price;
+                this.Description = description;
+                this.Hireable = hireable;
+            }
+
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public string Category { get; set; }
+            public string Price { get; set; }
+            public string Description { get; set; }
+            public bool Hireable { get; set; }
+        
     }
 }

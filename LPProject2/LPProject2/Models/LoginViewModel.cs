@@ -13,7 +13,7 @@ namespace LPProject2.Models
             public string Name { get; set; }
 
             [Required]
-            [MinLength(8)]
+            
             public string Password { get; set; }
         
     }

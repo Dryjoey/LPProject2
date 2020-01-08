@@ -10,7 +10,7 @@ namespace Interfaces
         public string name { get; private set; }
         public string category { get; private set; }
         public string description { get; private set; }
-        public int price { get; private set; }
+        public string price { get; private set; }
         public bool hireable { get; private set; }
     }
 }

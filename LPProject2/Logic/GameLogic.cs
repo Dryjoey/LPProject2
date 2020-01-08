@@ -1,36 +1,49 @@
 ﻿using DAL;
 using Interfaces;
-using Models;
 using System;
 using System.Collections.Generic;
 
 namespace Logic
 {
-    public class GameLogic
+    public class Game : IGame
     {
-        public ICrud<Game> game_dao { get; }
+         
+             
+        
+        public ICrud<GameDTO> game_dao { get; }
         public GameDAO gamedao { get; }
-
-        public GameLogic()
+        public void convert(GameDTO game)
         {
-            game_dao = new GameDAO();
+            game.Id = id;
+            game.Name = name;
+            game.Description = description;
+            game.Category = category;
+            game.Price = price;
+            game.Hireable = hireable;
         }
 
-        public void AddGame(Game game)
+        public Game()
+        {
+            GameDAO gamedao = new GameDAO();
+        }
+
+        public void AddGame(GameDTO game)
         {
             game_dao.AddEntity(game);
         }
 
-        public List<Game> GetAllGames()
+        public List<GameDTO> GetAllGames()
         {
             return game_dao.GetObjects();
         }
 
-        public void HireGame(Game game, User user)
+        public void HireGame(GameDTO game)
         {
-            if(CheckifHired(game, user) == true)
+            convert(game);
+            
+            if(CheckifHired(game) == true)
             {
-                gamedao.Hiregame(game, user);
+                 
             }
             else
             {
@@ -38,12 +51,8 @@ namespace Logic
             }
         }
 
-        public bool CheckifHired(Game game, User user)
+        public bool CheckifHired(GameDTO game)
         {
-            if (user.id == game.id)
-            {
-                return false;
-            }
             return true;
         }
     }

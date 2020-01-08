@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Interfaces;
 
 namespace DAL
 {
-    class AdDTO: IAd
+    class AdDTO
     {
+        public AdDTO(int id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
         public int Id { get; private set; }
         public string Name { get; private set; }
-        public IGame Game { get; private set; }
     }
 }

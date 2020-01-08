@@ -1,5 +1,5 @@
 ﻿using Interfaces;
-using Models;
+ 
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,33 +7,13 @@ using System.Text;
 
 namespace DAL
 {
-   public  class GameDAO : DAO , ICrud<Game>
+   public  class GameDAO : DAO , ICrud<GameDTO>
     {
-        List<Game> Gamelist = new List<Game>();
+        List<GameDTO> Gamelist = new List<GameDTO>();
 
-        public List<Game> GetAllGames()
+        public List<GameDTO> GetAllGames()
         {
-            con.Open();
-
-            string query = "SELECT * FROM GAMES";
-            List<Game> result = new List<Game>();
-
-            using (SqlCommand command = new SqlCommand(query, con))
-            {
-                command.ExecuteNonQuery();
-
-                SqlDataReader read = command.ExecuteReader();
-
-                while (read.Read())
-                {
-                  result.Add(new Game(read.GetInt32(0), read.GetString(1), read.GetString(2),read.GetInt32(3), read.GetString(4), read.GetBoolean(5)));
-                }
-            }
-
-            con.Close();
-
-            return result;
-
+            return null;
         }
 
 
@@ -47,25 +27,49 @@ namespace DAL
 
         }
 
-        public List<Game> GetObjects()
+        public List<GameDTO> GetObjects()
         {
-            return null;
+                con.Open();
+
+            string query = @"SELECT GameId, Name, Category, Description, Price, Hireable FROM GAME";
+
+            List<GameDTO> result = new List<GameDTO>();
+
+                using (SqlCommand command = new SqlCommand(query, con))
+                {
+                    command.ExecuteNonQuery();
+
+                    SqlDataReader read = command.ExecuteReader();
+
+                    while (read.Read())
+                    {
+                        result.Add(new GameDTO(read.GetInt32(0), read.GetString(1), read.GetString(2), read.GetString(3), read.GetString(4), read.GetBoolean(5)));
+                    }
+                }
+
+                con.Close();
+
+                return result;
+
+            
         }
 
-        public void AddEntity(Game game)
+        public void AddEntity(GameDTO game)
         {
             con.Open();
 
             string query =
 
-                "INSERT INTO Performer(Name, Category, Description, Hireable) VALUES (@Name, @Category, @Description, @Hireable)";
+                "INSERT INTO GAME(GameId, Name, Category, Description, Price, Hireable) VALUES (@GameId, @Name, @Category, @Description, @Price, @Hireable)";
 
             using (SqlCommand command = new SqlCommand(query, con))
             {
-                command.Parameters.AddWithValue("@Name", game.name);
-                command.Parameters.AddWithValue("@Category", game.category);
-                command.Parameters.AddWithValue("@Description", game.description);
-                command.Parameters.AddWithValue("@Hireable", game.hireable);
+                command.Parameters.AddWithValue("@GameId", game.Id);
+                command.Parameters.AddWithValue("@Name", game.Name);
+                command.Parameters.AddWithValue("@Category", game.Category);
+                command.Parameters.AddWithValue("@Description", game.Description);
+                command.Parameters.AddWithValue("@Price", game.Price);
+                command.Parameters.AddWithValue("@Hireable", game.Hireable);
                 
 
                 command.ExecuteNonQuery();
@@ -73,7 +77,7 @@ namespace DAL
                 con.Close();
             }
         }
-        public void Hiregame(Game game, User user)
+        public void Hiregame(GameDTO game, UserDTO user)
         {
             con.Open();
             string query = "SELECT Game.GameID, WebUser.WebUser.Name FROM Game INNER JOIN WebUser ON Game.GameID = WebUser.WebuserID";
